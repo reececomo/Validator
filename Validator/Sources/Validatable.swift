@@ -37,7 +37,7 @@ import Foundation
  ```
  extension String : Validatable {}
  
- "Hello world!".validate(rule: someRule)
+ "Hello world!".performValidation(rule: someRule)
  ```
  
  - Important:
@@ -58,7 +58,7 @@ public protocol Validatable {
      A validation result.
      
      */
-    func validate<R: ValidationRule>(rule: R) -> ValidationResult where R.InputType == Self
+    func performValidation<R: ValidationRule>(rule: R) -> ValidationResult where R.InputType == Self
     
     /**
      
@@ -71,18 +71,18 @@ public protocol Validatable {
      A validation result.
      
      */
-    func validate(rules: ValidationRuleSet<Self>) -> ValidationResult
+    func performValidation(rules: ValidationRuleSet<Self>) -> ValidationResult
     
 }
 
 extension Validatable {
     
-    public func validate<R: ValidationRule>(rule: R) -> ValidationResult where R.InputType == Self {
-        return Validator.validate(input: self, rule: rule)
+    public func performValidation<R: ValidationRule>(rule: R) -> ValidationResult where R.InputType == Self {
+        return Validator.performValidation(input: self, rule: rule)
     }
     
-    public func validate(rules: ValidationRuleSet<Self>) -> ValidationResult {
-        return Validator.validate(input: self, rules: rules)
+    public func performValidation(rules: ValidationRuleSet<Self>) -> ValidationResult {
+        return Validator.performValidation(input: self, rules: rules)
     }
     
 }

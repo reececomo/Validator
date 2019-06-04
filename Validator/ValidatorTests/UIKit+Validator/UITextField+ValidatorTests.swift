@@ -45,13 +45,13 @@ class UITextFieldValidatorTests: XCTestCase {
     func testThatItCanValidateInputText() {
         let textField = UITextField()
         textField.text = "Hello"
-        let noRulesValidation = textField.validate()
+        let noRulesValidation = textField.performValidation()
         XCTAssertTrue(noRulesValidation.isValid)
         let rule = ValidationRuleCondition<String>(error: testError) { ($0?.contains("A"))! }
-        let invalid = textField.validate(rule: rule)
+        let invalid = textField.performValidation(rule: rule)
         XCTAssertFalse(invalid.isValid)
         textField.text = "Hello Adam"
-        let valid = textField.validate(rule: rule)
+        let valid = textField.performValidation(rule: rule)
         XCTAssertTrue(valid.isValid)
     }
     
@@ -68,7 +68,7 @@ class UITextFieldValidatorTests: XCTestCase {
         textField.validationRules = rules
         XCTAssertNotNil(textField.validationRules)
         
-        textField.validateOnInputChange(enabled: true)
+        textField.performValidationOnInputChange(enabled: true)
         let actions = textField.actions(forTarget: textField, forControlEvent: .editingChanged) ?? []
         XCTAssertFalse(actions.isEmpty)
 
@@ -80,12 +80,12 @@ class UITextFieldValidatorTests: XCTestCase {
         }
         
         textField.text = "BCDE"
-        let _ = textField.validate() // textField.sendActionsForControlEvents(.EditingChanged) doesn't seem to work in test env
+        let _ = textField.performValidation() // textField.sendActionsForControlEvents(.EditingChanged) doesn't seem to work in test env
         XCTAssert(didRegisterInvalid)
         XCTAssertFalse(didRegisterValid)
         
         textField.text = "ABCDE"
-        let _ = textField.validate()
+        let _ = textField.performValidation()
         XCTAssert(didRegisterInvalid)
         XCTAssert(didRegisterValid)
     }

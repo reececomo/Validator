@@ -39,12 +39,12 @@ class ValidatableInterfaceElementTests: XCTestCase {
         
         let rule = ValidationRuleCondition<String>(error: testError) { $0!.characters.contains("A") }
         
-        let invalid = textField.validate(rule: rule)
+        let invalid = textField.performValidation(rule: rule)
         XCTAssertFalse(invalid.isValid)
         
         textField.text = "Hello Adam"
         
-        let valid = textField.validate(rule: rule)
+        let valid = textField.performValidation(rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }
@@ -58,17 +58,17 @@ class ValidatableInterfaceElementTests: XCTestCase {
         rules.add(rule: ValidationRuleLength(min: 5, error: testError))
         rules.add(rule: ValidationRuleCondition<String>(error: testError) { ($0?.characters.contains("A"))! })
         
-        let definitelyInvalid = textField.validate(rules: rules)
+        let definitelyInvalid = textField.performValidation(rules: rules)
         XCTAssertFalse(definitelyInvalid.isValid)
         
         textField.text = "Hi adam"
         
-        let partiallyInvalid = textField.validate(rules: rules)
+        let partiallyInvalid = textField.performValidation(rules: rules)
         XCTAssertFalse(partiallyInvalid.isValid)
         
         textField.text = "Hi Adam"
         
-        let valid = textField.validate(rules: rules)
+        let valid = textField.performValidation(rules: rules)
         XCTAssertTrue(valid.isValid)
         
     }
@@ -85,12 +85,12 @@ class ValidatableInterfaceElementTests: XCTestCase {
         
         textField.text = "Hi adam"
         
-        let invalid = textField.validate()
+        let invalid = textField.performValidation()
         XCTAssertFalse(invalid.isValid)
         
         textField.text = "Hi Adam"
 
-        let valid = textField.validate()
+        let valid = textField.performValidation()
         XCTAssertTrue(valid.isValid)
         
     }

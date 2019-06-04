@@ -36,10 +36,10 @@ class ValidationRuleLengthTests: XCTestCase {
         
         let rule = ValidationRuleLength(min: 5, error: testError)
         
-        let tooShort = Validator.validate(input: "aaaa", rule: rule)
+        let tooShort = Validator.performValidation(input: "aaaa", rule: rule)
         XCTAssertFalse(tooShort.isValid)
         
-        let valid = Validator.validate(input: "aaaaa", rule: rule)
+        let valid = Validator.performValidation(input: "aaaaa", rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }
@@ -48,10 +48,10 @@ class ValidationRuleLengthTests: XCTestCase {
         
         let rule = ValidationRuleLength(max: 5, error: testError)
         
-        let tooLong = Validator.validate(input: "aaaaaa", rule: rule)
+        let tooLong = Validator.performValidation(input: "aaaaaa", rule: rule)
         XCTAssertFalse(tooLong.isValid)
         
-        let valid = Validator.validate(input: "aaaaa", rule: rule)
+        let valid = Validator.performValidation(input: "aaaaa", rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }
@@ -60,14 +60,14 @@ class ValidationRuleLengthTests: XCTestCase {
         
         let rule = ValidationRuleLength(min: 5, max: 10, error: testError)
         
-        let tooShort = Validator.validate(input: "aaaa", rule: rule)
+        let tooShort = Validator.performValidation(input: "aaaa", rule: rule)
         XCTAssertFalse(tooShort.isValid)
     
-        let tooLong = Validator.validate(input: "aaaaaaaaaaa", rule: rule)
+        let tooLong = Validator.performValidation(input: "aaaaaaaaaaa", rule: rule)
         XCTAssertFalse(tooLong.isValid)
         
         for input in ["aaaaa", "aaaaaaaaaa", "aaaaaaaa"] {
-            let valid = Validator.validate(input: input, rule: rule)
+            let valid = Validator.performValidation(input: input, rule: rule)
             XCTAssertTrue(valid.isValid)
         }
         
@@ -78,10 +78,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(min: 2, error: testError)
 
-        let tooShort = Validator.validate(input: "🇯🇵", rule: rule)
+        let tooShort = Validator.performValidation(input: "🇯🇵", rule: rule)
         XCTAssertFalse(tooShort.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -90,10 +90,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(max: 2, error: testError)
 
-        let tooLong = Validator.validate(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
+        let tooLong = Validator.performValidation(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
         XCTAssertFalse(tooLong.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -102,10 +102,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(min: 16, lengthType: .utf8, error: testError)
 
-        let tooShort = Validator.validate(input: "🇯🇵", rule: rule)
+        let tooShort = Validator.performValidation(input: "🇯🇵", rule: rule)
         XCTAssertFalse(tooShort.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -114,10 +114,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(max: 16, lengthType: .utf8, error: testError)
 
-        let tooLong = Validator.validate(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
+        let tooLong = Validator.performValidation(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
         XCTAssertFalse(tooLong.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -126,10 +126,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(min: 8, lengthType: .utf16, error: testError)
 
-        let tooShort = Validator.validate(input: "🇯🇵", rule: rule)
+        let tooShort = Validator.performValidation(input: "🇯🇵", rule: rule)
         XCTAssertFalse(tooShort.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -138,10 +138,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(max: 8, lengthType: .utf16, error: testError)
 
-        let tooLong = Validator.validate(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
+        let tooLong = Validator.performValidation(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
         XCTAssertFalse(tooLong.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -150,10 +150,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(min: 4, lengthType: .unicodeScalars, error: testError)
 
-        let tooShort = Validator.validate(input: "🇯🇵", rule: rule)
+        let tooShort = Validator.performValidation(input: "🇯🇵", rule: rule)
         XCTAssertFalse(tooShort.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 
@@ -162,10 +162,10 @@ class ValidationRuleLengthTests: XCTestCase {
 
         let rule = ValidationRuleLength(max: 4, lengthType: .unicodeScalars, error: testError)
 
-        let tooLong = Validator.validate(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
+        let tooLong = Validator.performValidation(input: "🇯🇵🇯🇵🇯🇵", rule: rule)
         XCTAssertFalse(tooLong.isValid)
 
-        let valid = Validator.validate(input: "🇯🇵🇯🇵", rule: rule)
+        let valid = Validator.performValidation(input: "🇯🇵🇯🇵", rule: rule)
         XCTAssertTrue(valid.isValid)
     }
 }

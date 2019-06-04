@@ -92,7 +92,7 @@ public struct ValidationRulePattern: ValidationRule {
      true if the input matched the regular expression.
      
      */
-    public func validate(input: String?) -> Bool {
+    public func performValidation(input: String?) -> Bool {
         return NSPredicate(format: "SELF MATCHES %@", pattern).evaluate(with: input)
     }
     

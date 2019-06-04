@@ -32,14 +32,14 @@ import XCTest
 
 class ValidatableTests: XCTestCase {
     
-    func testThatItCanValidate() {
+    func testThatItCanPerformValidation() {
         
         let rule = ValidationRuleCondition<String>(error: testError) { ($0?.count)! > 0 }
         
-        let invalid = "".validate(rule: rule)
+        let invalid = "".performValidation(rule: rule)
         XCTAssertFalse(invalid.isValid)
         
-        let valid = "😀".validate(rule: rule)
+        let valid = "😀".performValidation(rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }

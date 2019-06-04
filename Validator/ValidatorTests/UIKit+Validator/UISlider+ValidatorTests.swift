@@ -53,18 +53,18 @@ class UISliderValidatorTests: XCTestCase {
 
         slider.value = 1.0
         
-        let tooSmall = slider.validate(rule: rule)
+        let tooSmall = slider.performValidation(rule: rule)
         XCTAssertFalse(tooSmall.isValid)
         
         slider.value = 8.0
         
-        let tooBig = slider.validate(rule: rule)
+        let tooBig = slider.performValidation(rule: rule)
         XCTAssertFalse(tooBig.isValid)
 
         slider.value = 4.0
         XCTAssertTrue(slider.inputValue == 4.0)
         
-        let valid = slider.validate(rule: rule)
+        let valid = slider.performValidation(rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }

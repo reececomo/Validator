@@ -238,7 +238,7 @@ public struct ValidationRulePaymentCard: ValidationRule {
      types.
      
      */
-    public func validate(input: String?) -> Bool {
+    public func performValidation(input: String?) -> Bool {
         guard let cardNum = input else { return false }
         guard ValidationRulePaymentCard.luhnCheck(cardNumber: cardNum) else { return false }
         guard let cardType = PaymentCardType(cardNumber: cardNum) else { return false }

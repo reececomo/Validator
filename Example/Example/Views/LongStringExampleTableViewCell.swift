@@ -23,7 +23,7 @@ final class LongStringExampleTableViewCell: ExampleTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        textView.validateOnInputChange(enabled: true)
+        textView.performValidationOnInputChange(enabled: true)
         textView.validationHandler = { result in self.updateValidationState(result: result) }
     }
     

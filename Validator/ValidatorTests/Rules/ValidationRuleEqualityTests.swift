@@ -36,10 +36,10 @@ class ValidationRuleEqualityTests: XCTestCase {
         
         let rule = ValidationRuleEquality<String>(target: "password", error: testError)
         
-        let invalid = Validator.validate(input: "p@ssword", rule: rule)
+        let invalid = Validator.performValidation(input: "p@ssword", rule: rule)
         XCTAssertFalse(invalid.isValid)
 
-        let valid = Validator.validate(input:"password", rule: rule)
+        let valid = Validator.performValidation(input:"password", rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }
@@ -48,10 +48,10 @@ class ValidationRuleEqualityTests: XCTestCase {
         
         let rule = ValidationRuleEquality<Double>(target: 1.0, error: testError)
         
-        let invalid = Validator.validate(input: 2.0, rule: rule)
+        let invalid = Validator.performValidation(input: 2.0, rule: rule)
         XCTAssertFalse(invalid.isValid)
         
-        let valid = Validator.validate(input: 1.0, rule: rule)
+        let valid = Validator.performValidation(input: 1.0, rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }
@@ -64,10 +64,10 @@ class ValidationRuleEqualityTests: XCTestCase {
         
         let rule = ValidationRuleEquality<String>(dynamicTarget: getter, error: testError)
         
-        let invalid = Validator.validate(input: "p@ssword", rule: rule)
+        let invalid = Validator.performValidation(input: "p@ssword", rule: rule)
         XCTAssertFalse(invalid.isValid)
         
-        let valid = Validator.validate(input: "password", rule: rule)
+        let valid = Validator.performValidation(input: "password", rule: rule)
         XCTAssertTrue(valid.isValid)
         
     }

@@ -38,7 +38,7 @@ import Foundation
     $0.contains("a") 
  }
  
- "Adam".validate(rule) // .valid
+ "Adam".performValidation(rule) // .valid
  ```
  
  */
@@ -81,7 +81,7 @@ public struct ValidationRuleCondition<T>: ValidationRule {
      true if the input satisifies the condition.
      
      */
-    public func validate(input: T?) -> Bool {
+    public func performValidation(input: T?) -> Bool {
         return condition(input)
     }
     

@@ -106,23 +106,23 @@ class ValidationRulePaymentCardTests: XCTestCase {
         let rule = ValidationRulePaymentCard(error: testError)
         
         for invalidLuhn in ["5716347184862961", "49927398717"] {
-            let invalid = Validator.validate(input: invalidLuhn, rule: rule)
+            let invalid = Validator.performValidation(input: invalidLuhn, rule: rule)
             XCTAssertFalse(invalid.isValid)
         }
         
         for validLuhn in ["4716347184862961", "49927398716"] {
-            let valid = Validator.validate(input: validLuhn, rule: rule)
+            let valid = Validator.performValidation(input: validLuhn, rule: rule)
             XCTAssertTrue(valid.isValid)
         }
         
         5.times { _ in
-            let validVisa = Validator.validate(input: self.visaCardNumbers.random, rule: rule)
+            let validVisa = Validator.performValidation(input: self.visaCardNumbers.random, rule: rule)
             XCTAssertTrue(validVisa.isValid)
-            let validMastercard = Validator.validate(input: self.mastercardCardNumbers.random, rule: rule)
+            let validMastercard = Validator.performValidation(input: self.mastercardCardNumbers.random, rule: rule)
             XCTAssertTrue(validMastercard.isValid)
-            let validMaestro = Validator.validate(input: self.maestroCardNumbers.random, rule: rule)
+            let validMaestro = Validator.performValidation(input: self.maestroCardNumbers.random, rule: rule)
             XCTAssertTrue(validMaestro.isValid)
-            let validAmex = Validator.validate(input: self.amexCardNumbers.random, rule: rule)
+            let validAmex = Validator.performValidation(input: self.amexCardNumbers.random, rule: rule)
             XCTAssertTrue(validAmex.isValid)
         }
     }
@@ -136,14 +136,14 @@ class ValidationRulePaymentCardTests: XCTestCase {
         let mastercard = mastercardCardNumbers.random
         let maestro = maestroCardNumbers.random
         
-        XCTAssertFalse(Validator.validate(input: visa, rule: amexOnlyRule).isValid)
-        XCTAssertFalse(Validator.validate(input: mastercard, rule: amexOnlyRule).isValid)
-        XCTAssertFalse(Validator.validate(input: maestro, rule: amexOnlyRule).isValid)
-        XCTAssertTrue(Validator.validate(input: amex, rule: amexOnlyRule).isValid)
+        XCTAssertFalse(Validator.performValidation(input: visa, rule: amexOnlyRule).isValid)
+        XCTAssertFalse(Validator.performValidation(input: mastercard, rule: amexOnlyRule).isValid)
+        XCTAssertFalse(Validator.performValidation(input: maestro, rule: amexOnlyRule).isValid)
+        XCTAssertTrue(Validator.performValidation(input: amex, rule: amexOnlyRule).isValid)
 
-        XCTAssertFalse(Validator.validate(input: amex, rule: visaOrMasterCardRule).isValid)
-        XCTAssertFalse(Validator.validate(input: maestro, rule: visaOrMasterCardRule).isValid)
-        XCTAssertTrue(Validator.validate(input: visa, rule: visaOrMasterCardRule).isValid)
-        XCTAssertTrue(Validator.validate(input: mastercard, rule: visaOrMasterCardRule).isValid)
+        XCTAssertFalse(Validator.performValidation(input: amex, rule: visaOrMasterCardRule).isValid)
+        XCTAssertFalse(Validator.performValidation(input: maestro, rule: visaOrMasterCardRule).isValid)
+        XCTAssertTrue(Validator.performValidation(input: visa, rule: visaOrMasterCardRule).isValid)
+        XCTAssertTrue(Validator.performValidation(input: mastercard, rule: visaOrMasterCardRule).isValid)
     }
 }

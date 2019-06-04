@@ -109,7 +109,7 @@ public struct ValidationRuleEquality<T: Equatable>: ValidationRule {
      true if the input equals the target.
      
      */
-    public func validate(input: T?) -> Bool {
+    public func performValidation(input: T?) -> Bool {
         if let dynamicTarget = dynamicTarget {
             return input == dynamicTarget()
         }

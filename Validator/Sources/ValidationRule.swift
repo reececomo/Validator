@@ -56,13 +56,13 @@ public protocol ValidationRule {
      true if valid.
      
      */
-    func validate(input: InputType?) -> Bool
+    func performValidation(input: InputType?) -> Bool
     
     /**
      
      An error to be contained in an `.invalid` `ValidationResult` should an 
      input not satify the condition of the validation described by 
-     `validate(input:)`
+     `performValidation(input:)`
      
      */
     var error: Error { get }
@@ -76,11 +76,11 @@ internal struct AnyValidationRule<InputType>: ValidationRule {
     let error: Error
     
     init<R: ValidationRule>(base: R) where R.InputType == InputType {
-        baseValidateInput = base.validate
+        baseValidateInput = base.performValidation
         error = base.error
     }
     
-    func validate(input: InputType?) -> Bool {
+    func performValidation(input: InputType?) -> Bool {
         return baseValidateInput(input)
     }
 

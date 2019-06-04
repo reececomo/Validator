@@ -36,10 +36,10 @@ class ValidationRuleRequiredTests: XCTestCase {
 
         let rule = ValidationRuleRequired<String?>(error: testError)
 
-        let invalid = Validator.validate(input: nil, rule: rule)
+        let invalid = Validator.performValidation(input: nil, rule: rule)
         XCTAssertFalse(invalid.isValid)
 
-        let valid = Validator.validate(input: "hello", rule: rule)
+        let valid = Validator.performValidation(input: "hello", rule: rule)
         XCTAssertTrue(valid.isValid)
 
     }

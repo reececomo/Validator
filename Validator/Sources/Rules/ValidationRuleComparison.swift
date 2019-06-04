@@ -83,7 +83,7 @@ public struct ValidationRuleComparison<T: Comparable>: ValidationRule {
         true if the input is equal to or between the minimum and maximum.
      
      */
-    public func validate(input: T?) -> Bool {
+    public func performValidation(input: T?) -> Bool {
         guard let input = input else { return false }
         return input >= min && input <= max
     }

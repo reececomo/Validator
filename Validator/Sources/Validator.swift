@@ -49,11 +49,11 @@ public struct Validator {
      A validation result.
      
      */
-    public static func validate<R: ValidationRule>(input: R.InputType?, rule: R) -> ValidationResult {
+    public static func performValidation<R: ValidationRule>(input: R.InputType?, rule: R) -> ValidationResult {
         
         var ruleSet = ValidationRuleSet<R.InputType>()
         ruleSet.add(rule: rule)
-        return Validator.validate(input: input, rules: ruleSet)
+        return Validator.performValidation(input: input, rules: ruleSet)
     }
     
     /**
@@ -68,8 +68,8 @@ public struct Validator {
      A validation result.
      
      */
-    public static func validate<T>(input: T?, rules: ValidationRuleSet<T>) -> ValidationResult {
-        let errors = rules.rules.filter { !$0.validate(input: input) }.map { $0.error }
+    public static func performValidation<T>(input: T?, rules: ValidationRuleSet<T>) -> ValidationResult {
+        let errors = rules.rules.filter { !$0.performValidation(input: input) }.map { $0.error }
         return errors.isEmpty ? .valid : .invalid(errors)
     }
     

@@ -38,10 +38,10 @@ class ValidatorTests: XCTestCase {
         
         let rule = ValidationRuleCondition<String>(error: err) { ($0?.count)! > 0 }
         
-        let invalid = Validator.validate(input: "", rule: rule)
+        let invalid = Validator.performValidation(input: "", rule: rule)
         XCTAssertEqual(invalid, ValidationResult.invalid([err]))
         
-        let valid = Validator.validate(input: "😀", rule: rule)
+        let valid = Validator.performValidation(input: "😀", rule: rule)
         XCTAssertEqual(valid, ValidationResult.valid)
         
     }
@@ -55,13 +55,13 @@ class ValidatorTests: XCTestCase {
         ruleSet.add(rule: ValidationRuleLength(min: 1, error: err1))
         ruleSet.add(rule: ValidationRuleCondition<String>(error: err2) { $0 == "😀" })
         
-        let definitelyInvalid = Validator.validate(input: "", rules: ruleSet)
+        let definitelyInvalid = Validator.performValidation(input: "", rules: ruleSet)
         XCTAssertEqual(definitelyInvalid, ValidationResult.invalid([err1, err2]))
         
-        let partiallyValid = "😁".validate(rules: ruleSet)
+        let partiallyValid = "😁".performValidation(rules: ruleSet)
         XCTAssertEqual(partiallyValid, ValidationResult.invalid([err2]))
 
-        let valid = "😀".validate(rules: ruleSet)
+        let valid = "😀".performValidation(rules: ruleSet)
         XCTAssertEqual(valid, ValidationResult.valid)
         
     }

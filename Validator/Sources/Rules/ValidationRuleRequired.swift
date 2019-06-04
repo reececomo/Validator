@@ -67,7 +67,7 @@ public struct ValidationRuleRequired<T>: ValidationRule {
      true if non-nil.
      
      */
-    public func validate(input: T?) -> Bool {        
+    public func performValidation(input: T?) -> Bool {        
         return input != nil
     }
     

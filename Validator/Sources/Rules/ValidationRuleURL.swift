@@ -64,7 +64,7 @@ public struct ValidationRuleURL: ValidationRule {
      true if the input is a valid URL.
      
      */
-    public func validate(input: String?) -> Bool {
+    public func performValidation(input: String?) -> Bool {
         guard let input = input else { return false }
         return NSURL(string: input) != nil
     }

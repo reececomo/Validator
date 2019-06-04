@@ -106,7 +106,7 @@ public struct ValidationRuleLength: ValidationRule {
      true if the input character count is between the minimum and maximum.
      
      */
-    public func validate(input: String?) -> Bool {
+    public func performValidation(input: String?) -> Bool {
         guard let input = input else { return false }
 
         let length: Int
