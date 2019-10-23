@@ -1,6 +1,6 @@
 # Validator
 
-Validator is a user input validation library written in Swift. It's comprehensive, designed for extension, and leaves the UI up to you.
+Validator is a user input validation library written in Swift. It's comprehensive, designed for extension, and leaves the UI up to you
 
 Here's how you might validate an email address:
 
